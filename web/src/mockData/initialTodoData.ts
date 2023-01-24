@@ -16,14 +16,14 @@ const createInitialTodoData = (): {[key: string]: Todo } => {
             title: 'Weekly. Complete todo --->',
             createdAt: now,
             taskId: 'oneTimeOnly',
-            type: Type.daily
+            type: Type.weekly
         },
         'monthlyTodoId': {
             id: 'monthlyTodoId',
             title: 'Monthly todo. Clean your room?',
             createdAt: now,
             taskId: 'oneTimeOnly',
-            type: Type.daily
+            type: Type.monthly
         }
     }
 
