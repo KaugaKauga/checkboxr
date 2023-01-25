@@ -26,7 +26,6 @@ const createInitialTodoData = (): {[key: string]: Todo } => {
             type: Type.monthly
         }
     }
-
 }
 
 export { createInitialTodoData };

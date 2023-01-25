@@ -9,8 +9,11 @@ import { Type } from "../../interfaces/todo";
 
 const History = () => {
     const { type = Type.daily } = useParams<{ type?: Type}>();
-    const todos = useTodoStore(state => state.getTodoByType(type));
-    const completedTodos = filter(todos, todo => todo.completedAt);
+    console.log({ type });
+    const todos = useTodoStore(state => state.getAllActiveTodos(type));
+    const completedTodos = filter(todos, 'completedAt');
+
+    console.log({ todos });
 
     return (
         <div>
@@ -20,7 +23,7 @@ const History = () => {
                 <BigStatDisplay number={`${size(todos)}`} title="Created" />
             </dl>
             <div className="space-y-4" >
-                {map(todos, todo => <HistoryListItem key={todo.id} todo={todo} />)}
+                {map(completedTodos, todo => <HistoryListItem key={todo.id} todo={todo} />)}
             </div>
         </div>
     )

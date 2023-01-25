@@ -1,4 +1,4 @@
-import { filter } from 'lodash';
+import { filter, map } from 'lodash';
 import create from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Category } from '../interfaces/category';
@@ -19,8 +19,8 @@ interface TodoState {
     categories: { [key: string]: Category },
     time: { [key: string]: Time },
     tasks: { [key: string]: Task },
-    getTodoByType: (type: Type) => Todo[],
-    getAllActiveTodos: (type?: Type) => Todo[],
+    getTodoByType: (type: Type | null) => Todo[],
+    getAllActiveTodos: (type: Type | null) => Todo[],
     toggleSidebar: () => void
 }
 
@@ -36,13 +36,16 @@ const useTodoStore = create<TodoState>()(
             completeTodo: (todo: Todo) => {
                 set(state => ({ todos: { ...state.todos, [todo.id]: { ...todo, completedAt: Date.now() } } }))
             },
-            getTodoByType: (type: Type) => {
+            getTodoByType: (type: Type | null) => {
                 const todos = get().todos;
+                if(!type) {
+                    return map(todos);
+                }
                 return filter(todos, todo => todo.type === type);
             },
-            getAllActiveTodos: (type?: Type) => {
-                const todos = get().todos;
-                return filter(todos, todo => filterDateForType(type || todo.type, todo.createdAt));
+            getAllActiveTodos: (type: Type | null) => {
+                const todos = get().getTodoByType(type);
+                return filter(todos, todo => filterDateForType(todo.type, todo.createdAt));
             },
             toggleSidebar: () => set(state => ({showSidebar: !state.showSidebar}))
         }),

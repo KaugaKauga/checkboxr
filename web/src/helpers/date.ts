@@ -6,6 +6,7 @@ const filterDateForType = (type: Type, unix: number) => {
     }
 
     if (type === Type.weekly) {
+        console.log('type === weekly');
         return isDateThisWeek(unix);
     }
 
