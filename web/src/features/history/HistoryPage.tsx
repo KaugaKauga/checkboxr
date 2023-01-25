@@ -20,7 +20,7 @@ const HistoryPage = () => {
                 <BigStatDisplay number={`${size(completedTodos)}`} title="Done" />
                 <BigStatDisplay number={`${size(todos)}`} title="Created" />
             </dl>
-            <div className="flex justify-between">
+            <div className="flex justify-between mb-7">
                 <FlowButton onClick={() => setType(null)} text="All" />
                 <FlowButton onClick={() => setType(Type.daily)} text="Daily" />
                 <FlowButton onClick={() => setType(Type.weekly)} text="Weekly" />
