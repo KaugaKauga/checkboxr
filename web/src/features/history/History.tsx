@@ -9,11 +9,8 @@ import { Type } from "../../interfaces/todo";
 
 const History = () => {
     const { type = Type.daily } = useParams<{ type?: Type}>();
-    console.log({ type });
     const todos = useTodoStore(state => state.getAllActiveTodos(type));
     const completedTodos = filter(todos, 'completedAt');
-
-    console.log({ todos });
 
     return (
         <div>
