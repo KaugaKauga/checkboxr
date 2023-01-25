@@ -13,6 +13,7 @@ import { TodoFlow } from './features/todoFlow/TodoFlow';
 import { OneTimeFlow } from './features/todoFlow/OneTimeFlow';
 import { History } from './features/history/History';
 import { Dashboard } from './features/dashboard/Dashboard';
+import { HistoryPage } from './features/history/HistoryPage';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
             element: <OneTimeFlow />
           }
         ]
+      },
+      {
+        path: 'history',
+        element: <HistoryPage />
       },
       {
         path: 'history/:type',

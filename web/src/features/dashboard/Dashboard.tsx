@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import shallow from 'zustand/shallow'
 import { Button } from "../../components/Button";
 import { NavBar } from "../../components/navigation/NavBar";
-import { SidebarToggleBtn } from "../../components/navigation/SidebarToggle";
+import { SidebarToggleBtn } from "../../components/navigation/SidebarToggleBtn";
 import { useTodoStore } from "../../helpers/store";
 import { Type } from "../../interfaces/todo";
 import { MainStats } from "./MainStats";
 import { TodoSection } from "./TodoSection";
 
 const Dashboard = () => {
-    const todos = useTodoStore(state => state.getAllActiveTodos(), shallow);
+    const todos = useTodoStore(state => state.getAllActiveTodos(null), shallow);
     const groupedTodosByType = groupBy(todos, todo => todo.type);
 
     return (

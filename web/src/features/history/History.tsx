@@ -5,11 +5,12 @@ import { HistoryListItem } from "../../components/HistoryListItem";
 import { GoBackButton } from "../../components/navigation/GoBackButton";
 import { NavBar } from "../../components/navigation/NavBar";
 import { useTodoStore } from "../../helpers/store";
+import { Type } from "../../interfaces/todo";
 
 const History = () => {
-    const { type = 'daily' } = useParams();
-    const todos = useTodoStore(state => state.getTodoByType(type));
-    const completedTodos = filter(todos, todo => todo.createdAt);
+    const { type = Type.daily } = useParams<{ type?: Type}>();
+    const todos = useTodoStore(state => state.getAllActiveTodos(type));
+    const completedTodos = filter(todos, 'completedAt');
 
     return (
         <div>
@@ -19,7 +20,7 @@ const History = () => {
                 <BigStatDisplay number={`${size(todos)}`} title="Created" />
             </dl>
             <div className="space-y-4" >
-                {map(todos, todo => <HistoryListItem key={todo.id} todo={todo} />)}
+                {map(completedTodos, todo => <HistoryListItem key={todo.id} todo={todo} />)}
             </div>
         </div>
     )
