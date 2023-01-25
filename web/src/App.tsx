@@ -17,7 +17,7 @@ function classNames(...classes: any) {
 }
 
 const navigation = [
-  { name: 'Home', to: '/', icon: HomeIcon, current: true },
+  { name: 'Home', to: '/', icon: HomeIcon, current: true, end: true },
   { name: 'History', to: 'history', icon: BookOpenIcon, current: false },
   { name: 'Analytics', to: 'analytics', icon: ChartBarIcon, current: false },
   { name: 'Settings', to: 'settings', icon: Cog6ToothIcon, current: false },
@@ -87,6 +87,7 @@ const App = () => {
                           key={item.name}
                           to={item.to}
                           className={({isActive}) => `${isActive && 'bg-stone-300'} text-stone-700 hover:bg-stone-300 hover:text-stone-700 group flex items-center px-2 py-2 text-base font-medium rounded-md`}
+                          end={item.end}
                         >
                           <item.icon
                             className={classNames(
@@ -137,6 +138,7 @@ const App = () => {
                     key={item.name}
                     to={item.to}
                     className={({isActive}) => `${isActive && 'bg-stone-300'} text-stone-700 hover:bg-stone-300 hover:text-stone-700 group flex items-center px-2 py-2 text-base font-medium rounded-md`}
+                    end={item.end}
                   >
                     <item.icon
                       className={classNames(
