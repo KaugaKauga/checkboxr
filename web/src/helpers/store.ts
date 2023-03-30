@@ -21,7 +21,8 @@ interface TodoState {
     tasks: { [key: string]: Task },
     getTodoByType: (type: Type | null) => Todo[],
     getAllActiveTodos: (type: Type | null) => Todo[],
-    toggleSidebar: () => void
+    toggleSidebar: () => void,
+    addMissedToCurrent: (todo: Todo) => void
 }
 
 const useTodoStore = create<TodoState>()(
@@ -47,7 +48,10 @@ const useTodoStore = create<TodoState>()(
                 const todos = get().getTodoByType(type);
                 return filter(todos, todo => filterDateForType(todo.type, todo.createdAt));
             },
-            toggleSidebar: () => set(state => ({showSidebar: !state.showSidebar}))
+            toggleSidebar: () => set(state => ({showSidebar: !state.showSidebar})),
+            addMissedToCurrent: (todo: Todo) => {
+                set(state => ({ todos: { ...state.todos, [todo.id]: { ...todo, createdAt: Date.now() } } }))
+            }
         }),
         {
             name: 'todo-storage',
