@@ -14,6 +14,7 @@ import { OneTimeFlow } from './features/todoFlow/OneTimeFlow';
 import { History } from './features/history/History';
 import { Dashboard } from './features/dashboard/Dashboard';
 import { HistoryPage } from './features/history/HistoryPage';
+import { AnalyticsPage } from './features/analytics/AnalyticsPage';
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: 'history/:type',
         element: <History />
+      },
+      {
+        path: 'analytics',
+        element: <AnalyticsPage />
       }
     ]
   }

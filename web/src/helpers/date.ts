@@ -12,7 +12,7 @@ const filterDateForType = (type: Type, unix: number) => {
     return isDateThisMonth(unix);
 }
 
-const getWeek = (unix: number) => {
+const getWeek = (unix: number): number => {
     const temp = new Date();
     const firstDayOfYear = new Date(temp.getFullYear(), 0, 1).getTime();
     const dayOfYear = ((unix - firstDayOfYear + 86400000) / 86400000);
@@ -44,4 +44,35 @@ const isDateThisMonth = (unix: number): boolean => {
         a.getMonth() === b.getMonth();
 }
 
-export { filterDateForType, isDateToday, isDateThisWeek, isDateThisMonth };
+const getStartOfDay = (unix: number): number => {
+    const date = new Date(unix);
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+
+    return date.valueOf();
+}
+
+const getStartOfWeek = (unix: number): number => {
+    const startOfDay = getStartOfDay(unix);
+    const date = new Date(startOfDay);
+    const startOfWeek = new Date(date.valueOf() - (date.getDay() * 1000 * 60 * 60 * 24));
+
+    return startOfWeek.valueOf();
+}
+
+const getStartOfMonth = (unix: number): number => {
+    const date = new Date(unix);
+    date.setDate(1);
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+    date.setMilliseconds(0);
+
+    return date.valueOf();
+}
+
+export { filterDateForType, isDateToday, isDateThisWeek, isDateThisMonth, getWeek, getStartOfDay, getStartOfMonth, getStartOfWeek };
