@@ -1,4 +1,4 @@
-import { filter, map, size } from "lodash";
+import { filter, map, orderBy, size } from "lodash";
 import { useState } from "react";
 import { BigStatDisplay } from "../../components/BigStatDisplay";
 import { FlowButton } from "../../components/FlowButton";
@@ -12,6 +12,10 @@ const HistoryPage = () => {
     const [type, setType] = useState<Type | null>(null);
     const todos = useTodoStore(state => state.getTodoByType(type));
     const completedTodos = filter(todos, 'completedAt');
+
+    
+    const sortedByDateTodos = orderBy(todos, 'createdAt', 'desc');
+    console.log({completedTodos, sortedByDateTodos})
 
     return (
         <div>
@@ -27,7 +31,7 @@ const HistoryPage = () => {
                 <FlowButton onClick={() => setType(Type.monthly)} text="Monthly" />
             </div>
             <div className="space-y-4" >
-                {map(todos, todo => <HistoryListItem key={todo.id} todo={todo} />)}
+                {map(sortedByDateTodos, todo => <HistoryListItem key={todo.id} todo={todo} />)}
             </div>
         </div>
     )
