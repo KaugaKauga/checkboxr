@@ -1,11 +1,11 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import {
   createBrowserRouter,
-  RouterProvider
+  RouterProvider  
 } from "react-router-dom";
 import { ErrorPage } from './components/ErrorPage';
 import { TemplateFlow } from './features/todoFlow/TemplateFlow';
@@ -14,6 +14,7 @@ import { OneTimeFlow } from './features/todoFlow/OneTimeFlow';
 import { History } from './features/history/History';
 import { Dashboard } from './features/dashboard/Dashboard';
 import { HistoryPage } from './features/history/HistoryPage';
+import './index.css'
 
 const router = createBrowserRouter([
   {
@@ -51,19 +52,10 @@ const router = createBrowserRouter([
   }
 ]);
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-
-root.render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <div className="h-full">
       <RouterProvider router={router} />
     </div>
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  </React.StrictMode>,
+)
