@@ -1,5 +1,5 @@
 import { groupBy } from "lodash";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import shallow from 'zustand/shallow'
 import { Button } from "../../components/Button";
 import { NavBar } from "../../components/navigation/NavBar";
@@ -8,10 +8,20 @@ import { useTodoStore } from "../../helpers/store";
 import { Type } from "../../interfaces/todo";
 import { MainStats } from "./MainStats";
 import { TodoSection } from "./TodoSection";
+import { useKeydown } from "../../hooks/useKeydown";
 
 const Dashboard = () => {
     const todos = useTodoStore(state => state.getAllActiveTodos(null), shallow);
     const groupedTodosByType = groupBy(todos, todo => todo.type);
+    const navigate = useNavigate();
+
+    useKeydown('Enter', () => {
+        navigate('todo/one');
+    });
+
+    useKeydown('T', () => {
+        navigate('todo/template');
+    });
 
     return (
         <div className="flex flex-col content-between h-full justify-between">
